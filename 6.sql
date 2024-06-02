@@ -178,3 +178,14 @@ SUM(CASE WHEN Product_Owned = 'S22 Ultra'  THEN Price END) AS 'S22 Ultra',
 SUM(CASE WHEN Product_Owned = 'Pixel 4'  THEN Price END) AS 'Pixel 4'
 FROM products_owned
 GROUP BY Name, Phone_Number;
+
+SELECT *, (iPhone+Gshock+Rolex+'S22 Ultra'+'Pixel 4') AS Total
+FROM (
+	SELECT Name, Phone_Number, 
+	SUM(CASE WHEN Product_Owned = 'iPhone'  THEN Price END) AS 'iPhone',
+	SUM(CASE WHEN Product_Owned = 'Gshock'  THEN Price END) AS 'Gshock',
+	SUM(CASE WHEN Product_Owned = 'Rolex'  THEN Price END) AS 'Rolex',
+	SUM(CASE WHEN Product_Owned = 'S22 Ultra'  THEN Price END) AS 'S22 Ultra',
+	SUM(CASE WHEN Product_Owned = 'Pixel 4'  THEN Price END) AS 'Pixel 4'
+	FROM products_owned
+	GROUP BY Name, Phone_Number) AS a;
